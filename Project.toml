@@ -1,0 +1,11 @@
+name = "ACL"
+uuid = "94eca028-1b42-4bfa-a860-273dbd8be4d3"
+version = "0.1.0"
+
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+Primes = "27ebfcd6-29c5-5fa9-bf4b-fb8fc14df3ae"
+
+[compat]
+DataStructures = "0.17.11"
+Primes = "0.4.0"
