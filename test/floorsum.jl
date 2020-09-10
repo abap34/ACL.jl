@@ -1,4 +1,24 @@
-@test floorsum(231248135,143081212,21332,23943) == 3986234580397
-@test floorsum(1000000000,1000000000,999999999,999999999) == 499999999500000000
-@test floorsum(919229602,311231321,5123123,1231231) == 6954556907962778
-@test floorsum(5,5,3,3) == 7
+#=
+https://judge.yosupo.jp/problem/sum_of_floor_of_linear
+を利用したjudge
+=#
+
+function readInput(input)
+    input[2] += 1
+    input[1][input[2] - 1]
+end
+
+function pushAns!(x, output)
+    push!(output, string(x))
+end
+
+parseInt(x) = parse(Int, x)
+parseMap(x::Array{SubString{String},1}) = map(parseInt, x)
+
+function main(input, output)
+    T = readInput(input) |> parseInt
+    for i = 1:T
+        N, M, A, B = readInput(input) |> split |> parseMap
+        pushAns!(floorsum(N, M, A, B), output)       
+    end
+end
