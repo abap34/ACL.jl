@@ -1,8 +1,10 @@
 module ACL
 
 export
-    floorsum
+    floorsum,
+    zalgorithm
 
 include("math/floorsum.jl")
+include("string/zalgorithm.jl")
 
 end
