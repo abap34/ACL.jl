@@ -1,8 +1,11 @@
 module ACL
 
 export
-    floorsum
+    floorsum,
+    suffixarray,
+    lcparray
 
 include("math/floorsum.jl")
+include("string/lcparray.jl")
 
 end
