@@ -11,7 +11,7 @@ function sanaive(s)
               end
               return l == n
           end)
-    return sa .+ 1
+    return sa
 end
 
 function sadoubling(s)
@@ -30,7 +30,7 @@ function sadoubling(s)
         sort!(sa, lt = cmp)
         tmp[begin+sa[begin]] = 0
         for i in 2:n
-            tmp[begin+sa[i]] = tmp[begin+sa[i-1]] + ((cmp(sa[i-1], sa[i])) ? 1 : 0)
+            tmp[begin+sa[i]] = tmp[begin+sa[i-1]] + (cmp(sa[i-1], sa[i]) ? 1 : 0)
         end
         tmp, rnk = rnk, tmp
         k *= 2
@@ -146,7 +146,7 @@ function sais(s, upper; thnaive = 10, thdoubling = 40)
     return sa
 end
 
-function suffixarray(s, upper)
+function suffixarray(s::Array{Number}, upper)
     for d in s
         0 <= d <= upper || error("s out of scope")
     end
@@ -159,7 +159,7 @@ function suffixarray(s)
     idx = collect(1:n)
     sort!(idx, by=x->s[x])
     s2 = zeros(Int, n)
-    now = 1
+    now = 0
     for i in 1:n
         i != 1 && s[idx[i-1]] != s[idx[i]] && (now += 1)
         s2[idx[i]] = now
@@ -173,16 +173,15 @@ function lcparray(s, sa=suffixarray(s))
     for i in 1:n
         rnk[sa[i]] = i
     end
-    println(rnk)
     lcp = zeros(Int, n-1)
     h = 0
     for i in 1:n
         h > 0 && (h -= 1)
         rnk[i] == 1 && continue
-        j = sa[rnk[i]]
-        while j+h < n && i+h < n
-            h += 1
+        j = sa[rnk[i]-1]
+        while j+h <= n && i+h <= n
             s[j+h] != s[i+h] && break
+            h += 1
         end
         lcp[rnk[i]-1] = h
     end
